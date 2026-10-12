@@ -56,8 +56,8 @@ pip install reportlab
 ## 使い方
 
 ###CTEST WIN
-1.CTEST　WINの上部バナーのファイル出力からADIFファイル出力を選択
-2.写真の条件でOKを選択。ファイル保存
+- 1.CTEST　WINの上部バナーのファイル出力からADIFファイル出力を選択
+- 2.写真の条件でOKを選択。ファイル保存
 <img width="337" height="334" alt="image" src="https://github.com/user-attachments/assets/4e38df37-396f-4712-b514-eb2993a93016" />
 ### GUI
 ```
