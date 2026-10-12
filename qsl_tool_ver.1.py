@@ -157,7 +157,7 @@ def ant_of(q, cfg):
 
 
 def split_call(call):
-    """'JA1ZGP/P' -> ('JA1ZGP', '/P')。移動でなければ suffix は空。"""
+    """'JA1ABC/P' -> ('JA1ABC', '/P')。移動でなければ suffix は空。"""
     parts = [p for p in call.split("/") if p]
     if len(parts) <= 1:
         return call, ""
