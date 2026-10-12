@@ -70,6 +70,7 @@ python qsl_tool.py
 1. 「ADIFを開く」で先ほど生成したADIFファイルを読み込む(未印刷の交信だけが選択された状態になります)
 2. 「設定」で Rig・Output・QTH などを入力して保存
 3. 「PDF作成」でPDFを保存し、印刷する
+<img width="661" height="402" alt="image" src="https://github.com/user-attachments/assets/bd73813d-752c-4b0e-8cf9-82df3f5c6a48" />
 
 
 ## 設定
@@ -80,8 +81,9 @@ python qsl_tool.py
 - **X補正・Y補正(mm)**: プリンタの紙送りによるズレの補正→作者環境では、特にもんだがなかったので未検証
 - **台紙画像**: 白紙カードのスキャン画像を指定すると、台紙と重ねたPDFで位置を確認できます(実際の印刷時は空にしてください)→未検証
 - **日本語フォント**: 空なら自動検出(Windowsのメイリオ等)。見つからないときはPDF内蔵の日本語フォントを使います。指定する場合は `.ttf` / `.ttc` のパスを入れてください
+- 印字位置は `qsl_tool.py` 冒頭の `POS`(白紙スキャン 896×1340px 上の座標)で調整できます。別デザインのカードを使う場合は、この値を合わせてください。
+<img width="406" height="355" alt="image" src="https://github.com/user-attachments/assets/32f6c98d-d68a-4250-b777-958286fdeb54" />
 
-印字位置は `qsl_tool.py` 冒頭の `POS`(白紙スキャン 896×1340px 上の座標)で調整できます。別デザインのカードを使う場合は、この値を合わせてください。
 
 ## 重複チェックについて
 
