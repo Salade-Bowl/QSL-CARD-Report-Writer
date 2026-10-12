@@ -7,7 +7,7 @@
   - 依存: reportlab (pip install reportlab) / GUIは標準のtkinter
 
 使い方:  python qsl_tool.py            -> GUI
-         python qsl_tool.py log.adi    -> CLI(未印刷分をすべてPDF化)
+         //python qsl_tool.py log.adi    -> CLI(未印刷分をすべてPDF化)
 """
 import json
 import re
