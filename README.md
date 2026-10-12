@@ -44,9 +44,9 @@ PSE QSL / TNX の□と 2WAY の手書き部分は印字しません(手書き�
 
 ルールを変えたいときは、`qsl_tool.py` 冒頭の `ANT_RULES` を書き換えてください。
 ## 作者の環境
-OS: Windows11 26H2
-Printer: Brother DCP-J928N
-(違う環境下での動作確認はしていません。トラブル等対応出来かねます。)
+- OS: Windows11 26H2
+- Printer: Brother DCP-J928N
+- (違う環境下での動作確認はしていません。トラブル等対応出来かねます。)
 ## 必要なもの
 
 - Python 3.8 以上(GUIは標準の tkinter を使います)
