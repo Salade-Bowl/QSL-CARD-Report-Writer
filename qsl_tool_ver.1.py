@@ -32,7 +32,7 @@ DEFAULT_CONFIG = {
     "source_tz": "JST",   # ADIFの時刻は JST / UTC どちらか
     "print_tz": "JST",    # カードに印字する時刻 JST / UTC
     "template_image": "", # 位置合わせ確認用: カード白紙スキャン画像(png/jpg)。空なら重ね刷りのみ
-    "offset_x_mm": 0.0,   # プリンタのズレ補正
+    "offset_x_mm": 0.0,   # プリンタのズレ補正　テストしていません
     "offset_y_mm": 0.0,
     "font": "Helvetica",
     "jp_font_path": "",   # 日本語フォント(.ttf/.ttc)。空なら自動検出→無ければ内蔵CIDフォント
