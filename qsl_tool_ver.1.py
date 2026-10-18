@@ -54,14 +54,14 @@ JP_FONT_CANDIDATES = [
 SCAN_W, SCAN_H = 896, 1340
 PAGE_W_MM, PAGE_H_MM = 100.0, 148.0
 POS = {
-    "call_box_x": [388, 470, 550, 640, 730, 810],  # TO RADIO 赤枠6つの中心x
+    "call_box_x": [388, 470, 550, 640, 730, 815],  # TO RADIO 赤枠6つの中心x
     "call_box_y": 125,                              # 同 中心y
     "row_y": 352,                                   # 表の記入行 文字ベースライン
     "to_line_x": 62, "to_line_y": 166,              # TO RADIO下の点線欄(移動局のコール/P)
-    "date_x": 62, "time_x": 305, "rst_x": 492, "mhz_x": 610,
-    "twoway_x": 785,                                # 2WAY欄(中央揃え)
+    "date_x": 62, "time_x": 305, "rst_x": 525, "mhz_x": 635,
+    "twoway_x": 795,                                # 2WAY欄(中央揃え)
     "qslno_x": 160, "qslno_y": 432,
-    "rig_x": 155, "rig_y": 492, "out_x": 690,
+    "rig_x": 155, "rig_y": 492, "out_x": 730,
     "ant_x": 155, "ant_y": 553,
     "rmks_x": 150, "rmks_y": 612,
     "rmks_line2_y": 655,
@@ -78,7 +78,7 @@ BAND_ALIAS = {"430": "70cm", "430mhz": "70cm", "144": "2m", "144mhz": "2m",
               "3.5": "80m", "3.5mhz": "80m"}
 HF_BANDS = {"160m", "80m", "60m", "40m", "30m", "20m", "17m", "15m", "12m", "10m"}
 # Antは原則ログのバンドから自動。ここを書き換えれば変更できる。
-ANT_RULES = {"80m": "1/2λDP", "2m": "GPアンテナ", "70cm": "GPアンテナ"}
+ANT_RULES = {"80m": "1/2λDPアンテナ", "2m": "GPアンテナ", "70cm": "GPアンテナ"}
 ANT_HF_DEFAULT = "1λワイヤーアンテナ"   # 上記以外のHF
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
           "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
