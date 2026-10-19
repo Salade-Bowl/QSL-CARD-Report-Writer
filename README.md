@@ -45,11 +45,12 @@ pip install reportlab openpyxl
 python qsl_airhamlog.py
 ```
 
-1. 「xlsxを開く」で、AirHamlogのログ(xlsx)を読み込む。未印刷の交信だけが選択された状態になります
-2. 「設定」で Rig・Output・OP名・QTH などを入力して保存
-3. 「PDF作成」でPDFを保存し、印刷する
+1. AirHanLogのログをCSVファイルでエクスポート。ExcelでCSVを読み取りxlsx形式で保存。
+2. 本アプリケーションより、「xlsxを開く」で、AirHamlogのログ(xlsx)を読み込む。未印刷の交信だけが選択された状態になります
+3. 「設定」で Rig・Output・OP名・QTH などを入力して保存
+4. 「PDF作成」でPDFを保存し、印刷する
 
-#### コマンドライン
+#### コマンドライン　　//テストしていません
 
 ```
 python qsl_airhamlog.py log.xlsx
@@ -150,7 +151,4 @@ python qsl_tool.py log.adi    # コマンドライン
 - カードのデザインや台紙のスキャン画像は、権利者の許可なく配布しないでください。
 - AirHamlog版は、AirHamlogのxlsx出力(列名 `id`, `callsign`, `qso_at` など)で確認しています。CTEST WIN版は、CTEST WIN V4.59のADIFで確認しています。他のバージョンや他のソフトでは、項目名の違いにより動かない場合があります。
 
-## ライセンス
-- 個人の非営利目的(アマチュア無線の運用)での使用は自由です。
-- 改変・再頒布・転載・販売は、作者の許可なく行わないでください。
 
