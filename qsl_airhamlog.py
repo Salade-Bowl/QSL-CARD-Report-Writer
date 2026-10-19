@@ -59,11 +59,11 @@ JP_FONT_CANDIDATES = [
 SCAN_W, SCAN_H = 896, 1340
 PAGE_W_MM, PAGE_H_MM = 100.0, 148.0
 POS = {
-    "call_box_x": [388, 470, 550, 640, 730, 810],  # TO RADIO 赤枠6つの中心x
+    "call_box_x": [388, 470, 550, 640, 730, 820],  # TO RADIO 赤枠6つの中心x
     "call_box_y": 125,
-    "to_line_x": 62, "to_line_y": 166,              # TO RADIO下の点線欄(移動局: コール/5 など)
+    "to_line_x": 80, "to_line_y": 135,              # TO RADIO下の点線欄(移動局: コール/5 など)
     "row_y": 352,
-    "date_x": 62, "time_x": 305, "rst_x": 525, "mhz_x": 635, "twoway_x": 795,
+    "date_x": 62, "time_x": 305, "rst_x": 525, "mhz_x": 650, "twoway_x": 795,
     "qslno_x": 160, "qslno_y": 432,
     "rig_x": 155, "rig_y": 492, "out_x": 730,
     "ant_x": 155, "ant_y": 553,
@@ -191,7 +191,7 @@ def fmt_datetime(q, source_tz, print_tz):
     dt = q["dt"]
     if source_tz != print_tz:
         dt += timedelta(hours=-9 if source_tz == "JST" else 9)
-    return f"{dt.day:02d} {MONTHS[dt.month - 1]} {dt.year}", dt.strftime("%H%M"), print_tz
+    return f"{dt.day:02d} {MONTHS[dt.month - 1]} {dt.year}", dt.strftime("%H:%M"), print_tz
 
 
 def mhz_text(q):
@@ -368,8 +368,8 @@ def render_pdf(qsos, out_path, cfg, history, assign_numbers=True):
         for i, line in enumerate(lines):
             text(POS["rmks_x"], POS["rmks_y0"] + i * pitch, line, size)
 
-        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 10)
-        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 9)
+        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 11)
+        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 11)
         c.showPage()
     c.save()
     return history
