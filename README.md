@@ -151,9 +151,6 @@ python qsl_tool.py log.adi    # コマンドライン
 - AirHamlog版は、AirHamlogのxlsx出力(列名 `id`, `callsign`, `qso_at` など)で確認しています。CTEST WIN版は、CTEST WIN V4.59のADIFで確認しています。他のバージョンや他のソフトでは、項目名の違いにより動かない場合があります。
 
 ## ライセンス
-
-All rights reserved(詳細は `LICENSE` を参照)
-
 - 個人の非営利目的(アマチュア無線の運用)での使用は自由です。
 - 改変・再頒布・転載・販売は、作者の許可なく行わないでください。
 
