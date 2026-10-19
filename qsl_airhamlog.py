@@ -35,6 +35,8 @@ DEFAULT_CONFIG = {
     "rmks_tnx": "TNX FB QSO.",
     "rmks_line2": "次回もよろしくお願いします。",
     "rmks_line3": "",
+    "rmks_size": 10,      # Rmks.の文字サイズ(pt)
+    "rmks_pitch_mm": 2.9, # Rmks.の行間(mm)。行数が多いときは自動で詰めます
     "source_tz": "JST",   # ログの時刻 JST / UTC (AirHamlogは「UTC」表記でも実際はJST)
     "print_tz": "JST",    # カードに印字する時刻 JST / UTC
     "template_image": "", # 位置確認用: カード白紙スキャン画像。空なら重ね刷りのみ
@@ -57,11 +59,11 @@ JP_FONT_CANDIDATES = [
 SCAN_W, SCAN_H = 896, 1340
 PAGE_W_MM, PAGE_H_MM = 100.0, 148.0
 POS = {
-    "call_box_x": [388, 470, 550, 640, 730, 815],  # TO RADIO 赤枠6つの中心x
-    "call_box_y": 125,
+    "call_box_x": [388, 466, 544, 622, 700, 803],  # TO RADIO 赤枠6つの中心x
+    "call_box_y": 135,
     "to_line_x": 62, "to_line_y": 166,              # TO RADIO下の点線欄(移動局: コール/5 など)
     "row_y": 352,
-    "date_x": 62, "time_x": 305, "rst_x": 525, "mhz_x": 635, "twoway_x": 795,
+    "date_x": 62, "time_x": 305, "rst_x": 492, "mhz_x": 610, "twoway_x": 785,
     "qslno_x": 160, "qslno_y": 432,
     "rig_x": 155, "rig_y": 492, "out_x": 690,
     "ant_x": 155, "ant_y": 553,
@@ -69,13 +71,15 @@ POS = {
     "rmks_y0": 606,                                 # 1行目のベースライン
     "free_x": 75, "free_y1": 730, "free_dy": 48,    # OP. / QTH.
 }
-# Rmks.の行レイアウト候補: (文字サイズpt, 最大行数, 行間px)。収まらなければ次の候補へ
-RMKS_LAYOUTS = [(10, 3, 26), (9, 4, 20)]
+# Rmks.の自動調整(スキャン座標px)。最終行のベースラインがここを超えないようにする
+RMKS_BOTTOM = 668      # 欄の下の点線(約670)の少し上
+RMKS_MIN_SIZE = 7.0    # 自動縮小の下限(pt)
+RMKS_TIGHT = 2.2       # 行間の下限 = 文字サイズ(pt) x この値(px)
 
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
           "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
-ANT_DP = "1/2λDPアンテナ"
+ANT_DP = "1/2λDP"
 ANT_HF = "1λワイヤーアンテナ"
 ANT_GP = "GPアンテナ"
 
@@ -287,12 +291,21 @@ def rmks_layout(q, cfg, measure_for, max_w):
         head += (" " if head else "") + q["card_remarks"]
     tokens = list(head) + ([" "] if head else []) + [cfg["rmks_tnx"]]
     fixed = [t for t in (cfg["rmks_line2"], cfg["rmks_line3"]) if t.strip()]
-    for size, max_lines, pitch in RMKS_LAYOUTS:
-        lines = wrap_text(tokens, max_w, lambda x: measure_for(x, size)) + fixed
-        if len(lines) <= max_lines:
-            return lines, size, pitch
-    size, max_lines, pitch = RMKS_LAYOUTS[-1]
-    return lines[:max_lines], size, pitch
+    base_size = float(cfg["rmks_size"])
+    base_pitch = float(cfg["rmks_pitch_mm"]) * SCAN_W / PAGE_W_MM   # mm -> px
+    span = RMKS_BOTTOM - POS["rmks_y0"]
+    size = base_size
+    while True:
+        lines = wrap_text(tokens, max_w, lambda x, s=size: measure_for(x, s)) + fixed
+        n = len(lines)
+        if n <= int(span // base_pitch) + 1:          # 設定どおりの行間で収まる
+            return lines, size, base_pitch
+        if n > 1 and span / (n - 1) >= size * RMKS_TIGHT:   # 行間を詰めれば収まる
+            return lines, size, span / (n - 1)
+        if size <= RMKS_MIN_SIZE:                     # これ以上は縮小できない → 末尾を切る
+            tight = size * RMKS_TIGHT
+            return lines[:max(1, int(span // tight) + 1)], size, tight
+        size -= 0.5                                   # 文字を小さくして再試行
 
 
 # ------------------------------------------------------------- PDF ---------
@@ -355,8 +368,8 @@ def render_pdf(qsos, out_path, cfg, history, assign_numbers=True):
         for i, line in enumerate(lines):
             text(POS["rmks_x"], POS["rmks_y0"] + i * pitch, line, size)
 
-        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 10)
-        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 9)
+        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 11)
+        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 11)
         c.showPage()
     c.save()
     return history
@@ -453,6 +466,7 @@ def run_gui():
                   ("ant", "Ant(自動判定外の周波数用)"), ("qth", "QTH"), ("op_name", "OP名"),
                   ("rmks_tnx", "Rmks 定型(名前の後ろ)"), ("rmks_line2", "Rmks 2行目"),
                   ("rmks_line3", "Rmks 3行目"),
+                  ("rmks_size", "Rmks 文字サイズ(pt)"), ("rmks_pitch_mm", "Rmks 行間(mm)"),
                   ("source_tz", "ログの時刻 (JST/UTC)"), ("print_tz", "印字する時刻 (JST/UTC)"),
                   ("template_image", "位置確認用の台紙画像"),
                   ("jp_font_path", "日本語フォント(.ttf/.ttc 空=自動)"),
@@ -465,7 +479,7 @@ def run_gui():
 
         def ok():
             for k, v in vars_.items():
-                cfg[k] = float(v.get() or 0) if k.startswith("offset") else v.get().strip()
+                cfg[k] = float(v.get() or 0) if k.startswith("offset") or k in ("rmks_size", "rmks_pitch_mm") else v.get().strip()
             save_config(cfg)
             win.destroy()
             refresh()
