@@ -57,11 +57,11 @@ JP_FONT_CANDIDATES = [
 SCAN_W, SCAN_H = 896, 1340
 PAGE_W_MM, PAGE_H_MM = 100.0, 148.0
 POS = {
-    "call_box_x": [388, 466, 544, 622, 700, 803],  # TO RADIO 赤枠6つの中心x
-    "call_box_y": 135,
+    "call_box_x": [388, 470, 550, 640, 730, 815],  # TO RADIO 赤枠6つの中心x
+    "call_box_y": 125,
     "to_line_x": 62, "to_line_y": 166,              # TO RADIO下の点線欄(移動局: コール/5 など)
     "row_y": 352,
-    "date_x": 62, "time_x": 305, "rst_x": 492, "mhz_x": 610, "twoway_x": 785,
+    "date_x": 62, "time_x": 305, "rst_x": 525, "mhz_x": 635, "twoway_x": 795,
     "qslno_x": 160, "qslno_y": 432,
     "rig_x": 155, "rig_y": 492, "out_x": 690,
     "ant_x": 155, "ant_y": 553,
@@ -75,7 +75,7 @@ RMKS_LAYOUTS = [(10, 3, 26), (9, 4, 20)]
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
           "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
-ANT_DP = "1/2λDP"
+ANT_DP = "1/2λDPアンテナ"
 ANT_HF = "1λワイヤーアンテナ"
 ANT_GP = "GPアンテナ"
 
@@ -355,8 +355,8 @@ def render_pdf(qsos, out_path, cfg, history, assign_numbers=True):
         for i, line in enumerate(lines):
             text(POS["rmks_x"], POS["rmks_y0"] + i * pitch, line, size)
 
-        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 11)
-        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 11)
+        text(POS["free_x"], POS["free_y1"], f"OP.  {cfg['op_name']}", 10)
+        text(POS["free_x"], POS["free_y1"] + POS["free_dy"], f"QTH. {cfg['qth']}", 9)
         c.showPage()
     c.save()
     return history
