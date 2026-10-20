@@ -9,7 +9,7 @@
 | ツール | 対応するログ | 入力ファイル |
 | --- | --- | --- |
 | `qsl_airhamlog.py` | AirHamlog | `.xlsx`(UTF-8) |
-| `qsl_tool.py` | CTEST WIN | `.adi` / `.adif`(ADIF) |
+| `qsl_ctestwin.py` | CTEST WIN | `.adi` / `.adif`(ADIF) |
 
 ## 共通の特長
 
@@ -106,7 +106,7 @@ xlsxの1行目の列名で読み取ります(`id`, `callsign`, `portable`, `qso_
 
 ---
 
-## CTEST WIN版 (`qsl_tool.py`)
+## CTEST WIN版 (`qsl_ctestwin.py`)
 
 CTEST WINが出力するADIFファイルを読み込みます。使い方はAirHamlog版と同じです。
 
